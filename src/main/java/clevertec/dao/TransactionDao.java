@@ -3,7 +3,7 @@ package clevertec.dao;
 public interface TransactionDao {
 
     void makeTransfer();
-    void refill();
-    void withdrowal();
+    void refill(long accountId, double amount);
+    void withdrowal(long accountId, double amount);
 
 }

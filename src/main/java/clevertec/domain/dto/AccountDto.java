@@ -20,11 +20,15 @@ public @Data class AccountDto {
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @JsonDeserialize(using = CustomLocalDateTimeDesSerializer.class)
     private LocalDateTime dtCreate;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @JsonDeserialize(using = CustomLocalDateTimeDesSerializer.class)
+    private LocalDateTime dtUpdate;
     private String iban;
     private String currency;
     private long bankId;
     private long userId;
-    private double amount;
+    private double balance;
 
 
 }

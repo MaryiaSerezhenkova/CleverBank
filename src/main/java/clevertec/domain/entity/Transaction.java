@@ -26,9 +26,6 @@ public @Data class Transaction implements IEntity {
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @JsonDeserialize(using = CustomLocalDateTimeDesSerializer.class)
     private LocalDateTime start;
-    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
-    @JsonDeserialize(using = CustomLocalDateTimeDesSerializer.class)
-    private LocalDateTime finish;
     private double amount;
 
 

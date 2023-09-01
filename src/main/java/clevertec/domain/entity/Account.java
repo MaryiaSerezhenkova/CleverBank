@@ -20,11 +20,14 @@ public  @Data class Account implements IEntity {
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @JsonDeserialize(using = CustomLocalDateTimeDesSerializer.class)
     private LocalDateTime dtCreate;
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @JsonDeserialize(using = CustomLocalDateTimeDesSerializer.class)
+    private LocalDateTime dtUpdate;
     private String iban;
     private String currency;
     private long bankId;
     private long userId;
-    private double amount;
+    private double balance;
 
 
 }

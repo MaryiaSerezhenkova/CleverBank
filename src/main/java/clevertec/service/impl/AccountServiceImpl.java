@@ -20,11 +20,12 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto create(AccountDto item) {
         Account account = new Account();
         account.setDtCreate(item.getDtCreate());
+        account.setDtUpdate(account.getDtCreate());
         account.setIban(item.getIban());
         account.setCurrency(item.getCurrency());
         account.setBankId(item.getBankId());
         account.setUserId(item.getUserId());
-        account.setAmount(item.getAmount());
+        account.setBalance(item.getBalance());
         return mapper.toDTO(dao.create(account));
     }
 

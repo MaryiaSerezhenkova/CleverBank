@@ -17,9 +17,5 @@ public class TransactionDto {
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     @JsonDeserialize(using = CustomLocalDateTimeDesSerializer.class)
     private LocalDateTime start;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
-    @JsonDeserialize(using = CustomLocalDateTimeDesSerializer.class)
-    private LocalDateTime finish;
     private double amount;
 }

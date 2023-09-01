@@ -13,7 +13,7 @@ import java.util.List;
 import static clevertec.dbo.HikariCPDataSource.getConnection;
 
 public class AccountDaoImpl implements AccountDao {
-    private static final String INSERT_SQL = "INSERT INTO app.account (dt_create, iban, currency, bankId, userId, amount) values (?, ?, ?, ?, ?, ?);";
+    private static final String INSERT_SQL = "INSERT INTO app.account (dt_create,dt_update, iban, currency, bankId, userId, amount) values (?, ?, ?, ?, ?, ?);";
     private static final String SELECT_BY_ID_SQL = "Select * from app.account where id=?;";
     private static final String SELECT_BY_USER_SQL = "Select account.id, account.dt_create, account.iban, account.currency, account.amount, account.bank, account.user from app.account" +
             "JOIN app.user ON account.user=user.id WHERE user=? ;";
@@ -35,7 +35,8 @@ public class AccountDaoImpl implements AccountDao {
             s.setString(3, acc.getCurrency());
             s.setLong(4, acc.getBankId());
             s.setLong(5, acc.getUserId());
-            s.setDouble(6, acc.getAmount());
+            s.setDouble(6, acc.getBalance());
+            s.setObject(7, acc.getDtUpdate());
             int updated = s.executeUpdate();
             ResultSet rs = s.getGeneratedKeys();
             if (rs.next()) {
@@ -60,8 +61,9 @@ public class AccountDaoImpl implements AccountDao {
                 acc.setCurrency(rs.getString("currency"));
                 acc.setBankId(rs.getLong("bank"));
                 acc.setUserId(rs.getLong("user"));
-                acc.setAmount(rs.getDouble("amount"));
+                acc.setBalance(rs.getDouble("balance"));
                 acc.setDtCreate(rs.getTimestamp("dt_create").toLocalDateTime());
+                acc.setDtUpdate(rs.getTimestamp("dt_update").toLocalDateTime());
                 return acc;
             }
 
@@ -87,7 +89,7 @@ public class AccountDaoImpl implements AccountDao {
                 acc.setIban(rs.getString("iban"));
                 acc.setCurrency(rs.getString("currency"));
                 acc.setBankId(rs.getLong("bank"));
-                acc.setAmount(rs.getDouble("amount"));
+                acc.setBalance(rs.getDouble("balance"));
                 list.add(acc);
             }
 
@@ -113,7 +115,7 @@ public class AccountDaoImpl implements AccountDao {
                 acc.setIban(rs.getString("iban"));
                 acc.setCurrency(rs.getString("currency"));
                 acc.setUserId(rs.getLong("user"));
-                acc.setAmount(rs.getDouble("amount"));
+                acc.setBalance(rs.getDouble("balance"));
                 list.add(acc);
             }
 
